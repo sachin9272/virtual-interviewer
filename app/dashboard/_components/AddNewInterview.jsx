@@ -14,17 +14,22 @@ import { Button } from "@/components/ui/button";
 // import { Input } from "postcss";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
+import {sendMessageToGemini} from '../../../utils/GeminiAIModal'
 
 const AddNewInterview = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [jobPosition, setJobPosition] = useState();
   const [jobDesc, setJobDesc] = useState();
   const [jobExperience, setJobExperience] = useState();
-  const onSubmit = (event) => {
+  const onSubmit = async(event) => {
     event.preventDefault();
     console.log("Job Position:", jobPosition);
     console.log("Job Description:",jobDesc);
     console.log("Job Experience:", jobExperience)
+
+    const InputPrompt = `Job Position: ${jobPosition}, Job Description: ${jobDesc}, Years of Experience: ${jobExperience} , Depends on Job Position, Job Description & Years of Experience Give us ${process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT} interview question along with answer in JSON format, Give us question and answer field on JSON`
+    const result = await sendMessageToGemini(InputPrompt);
+    console.log(result);
   };
   return (
     <div>
