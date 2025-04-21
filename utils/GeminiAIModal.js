@@ -5,7 +5,7 @@ let chatSession = null;
 
 export async function sendMessageToGemini(prompt) {
   if (!chatSession) {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-preview-04-17' });
     chatSession = model.startChat();
   }
 
