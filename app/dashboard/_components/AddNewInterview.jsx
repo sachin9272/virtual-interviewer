@@ -45,7 +45,7 @@ const AddNewInterview = () => {
             <DialogTitle className="text-2xl">
               Tell us more about your job interviewing
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription asChild>
               <form onSubmit={onSubmit}>
                 <div>
                   <h2>
