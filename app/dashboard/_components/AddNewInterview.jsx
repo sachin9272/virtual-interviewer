@@ -15,13 +15,16 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import {sendMessageToGemini} from '../../../utils/GeminiAIModal'
+import { LoaderCircle } from "lucide-react";
 
 const AddNewInterview = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const [jobPosition, setJobPosition] = useState();
   const [jobDesc, setJobDesc] = useState();
   const [jobExperience, setJobExperience] = useState();
+  const [loading, setLoading] = useState(false);
   const onSubmit = async(event) => {
+    setLoading(true);
     event.preventDefault();
     console.log("Job Position:", jobPosition);
     console.log("Job Description:",jobDesc);
@@ -30,6 +33,14 @@ const AddNewInterview = () => {
     const InputPrompt = `Job Position: ${jobPosition}, Job Description: ${jobDesc}, Years of Experience: ${jobExperience} , Depends on Job Position, Job Description & Years of Experience Give us ${process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT} interview question along with answer in JSON format, Give us question and answer field on JSON`
     const result = await sendMessageToGemini(InputPrompt);
     console.log(result);
+    const cleaned = result.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(cleaned);
+    console.log(parsed);
+    // const MockJsonResp = (result.response.text()).replace('```json', '').replace('```', '')
+    // const MockJsonResp = result.response.replace('```json', '').replace('```', '');
+
+    // console.log(JSON.parse(MockJsonResp));
+    setLoading(false);
   };
   return (
     <div>
@@ -86,7 +97,11 @@ const AddNewInterview = () => {
                     >
                       Cancel
                     </Button>
-                    <Button type="submit">Start Interview</Button>
+                    <Button type="submit" disabled={loading}>
+                      {loading? 
+                      <>
+                      <LoaderCircle className="animate-spin"/>Generating from AI✨</>:'Start Interview'}
+                    </Button>
                   </div>
                 </div>
               </form>
