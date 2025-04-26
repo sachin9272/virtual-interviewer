@@ -18,8 +18,10 @@ import {sendMessageToGemini} from '../../../utils/GeminiAIModal'
 import { LoaderCircle } from "lucide-react";
 import {v4 as uuidv4} from 'uuid';
 import { useUser } from "@clerk/nextjs";
-import db from '../../../utils/db'
+import {db} from '@/utils/db'
 import { MockInterview } from "@/utils/schema";
+import moment from "moment";
+import { useRouter } from "next/router";
 
 const AddNewInterview = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -28,6 +30,7 @@ const AddNewInterview = () => {
   const [jobExperience, setJobExperience] = useState();
   const [loading, setLoading] = useState(false);
   const [jsonResponse, setJsonResponse] = useState([]);
+  const router = useRouter();
   const {user} = useUser();
   const onSubmit = async(event) => {
     setLoading(true);
@@ -45,18 +48,21 @@ const AddNewInterview = () => {
   
     setJsonResponse(cleaned)
     if(cleaned){
-    const resp = await db.insert(MockInterview.mockInterview)
+    const resp = await db.insert(MockInterview)
     .values({
       mockId:uuidv4(),
-      id:serial('id').primaryKey(),
       jsonMockResp: cleaned,
       jobPosition: jobPosition,
       jobDesc: jobDesc,
       jobExperience: jobExperience,
-      createdBy: user?.primaryEmailAddress?.emailAddress,
+      createdBy: user?.primaryEmailAddress?.emailAddress ? user?.primaryEmailAddress?.emailAddress : "sachinsingh9272@gmail.com",
       createdAt: moment().format('DD-MM-YYYY'),
     }).returning({mockId:MockInterview.mockId})
     console.log("Inserted ID:", resp);
+    if(resp){
+      setOpenDialog(false);
+      router.push('/dashboard/interview'+resp[0]?.mockId)
+    }
   }else{
     console.log("Error")
   }
@@ -106,7 +112,7 @@ const AddNewInterview = () => {
                       type="number"
                       max="50"
                       required
-                      onClick={(event) => setJobExperience(event.target.value)}
+                      onChange={(event) => setJobExperience(event.target.value)}
                     />
                   </div>
                   <div className="flex justify-end gap-5">
