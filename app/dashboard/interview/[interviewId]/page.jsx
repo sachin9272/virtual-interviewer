@@ -7,6 +7,7 @@ import { Lightbulb, WebcamIcon } from "lucide-react";
 import Webcam from "react-webcam";
 import React, { useEffect, use, useState } from "react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Interview = ({ params }) => {
   const { interviewId } = use(params);
@@ -25,7 +26,7 @@ const Interview = ({ params }) => {
     console.log(result);
   };
   return (
-    <div className="my-10 flex justify-center flex-col items-center">
+    <div className="my-10 md:mx-36 flex justify-center flex-col items-center">
       <h2 className="font-bold text-2xl">Let's Get Started</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="flex flex-col my-5 gap-5">
@@ -69,7 +70,11 @@ const Interview = ({ params }) => {
           )}
         </div>
       </div>
-      <div className="flex justify-center items-center"><Button>Start Interview</Button></div>
+      <div className="flex justify-center items-center">
+        <Link href={'/dashboard/interview/'+interviewId+'/start'}>
+        <Button>Start Interview</Button>
+        </Link>
+        </div>
     </div>
   );
 };
