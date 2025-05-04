@@ -21,7 +21,9 @@ import { useUser } from "@clerk/nextjs";
 import {db} from '@/utils/db'
 import { MockInterview } from "@/utils/schema";
 import moment from "moment";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation"; // ✅ Correct for App Router
+
 
 const AddNewInterview = () => {
   const [openDialog, setOpenDialog] = useState(false);
