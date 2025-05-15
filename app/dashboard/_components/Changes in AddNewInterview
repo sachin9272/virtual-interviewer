@@ -2,13 +2,8 @@
 
 import React from "react";
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+import { Dialog, DialogContent, DialogDescription, DialogHeader,
+  DialogTitle, DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 // import { Input } from "postcss";
@@ -21,7 +16,6 @@ import { useUser } from "@clerk/nextjs";
 import {db} from '@/utils/db'
 import { MockInterview } from "@/utils/schema";
 import moment from "moment";
-// import { useRouter } from "next/router";
 import { useRouter } from "next/navigation"; // ✅ Correct for App Router
 
 
