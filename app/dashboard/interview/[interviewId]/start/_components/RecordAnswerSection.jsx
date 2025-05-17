@@ -58,7 +58,7 @@ const RecordAnswerSection = ({mockInterviewQuestion, activeQuestionIndex}) => {
       />
     </div>
     <Button variant="outline" className='my-10'
-    onClick={isRecording?stopSpeechToText:startSpeechToText}>
+    onClick={SavedUserAnswer}>
       {isRecording?
         <h2 className='text-red-600 flex gap-2'>
           <Mic/> Stop Recording
