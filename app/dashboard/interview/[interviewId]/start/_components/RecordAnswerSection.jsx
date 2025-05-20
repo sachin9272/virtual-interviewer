@@ -39,6 +39,8 @@ const RecordAnswerSection = ({mockInterviewQuestion, activeQuestionIndex}) => {
       console.log("Feedback Result--->", result);
       const mockJsonResp = (result.response.text()).replace(/```json|```/g, '').trim();
       console.log(mockJsonResp);
+      const JsonFeedbackResp = JSON.parse(mockJsonResp);
+      
     }else{
       startSpeechToText();
     }
