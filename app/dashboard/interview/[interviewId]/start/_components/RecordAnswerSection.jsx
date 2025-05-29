@@ -27,6 +27,7 @@ const RecordAnswerSection = ({mockInterviewQuestion, interviewData, activeQuesti
     results,
     startSpeechToText,
     stopSpeechToText,
+    setResults
   } = useSpeechToText({
     continuous: true,
     useLegacyResults: false
@@ -103,7 +104,7 @@ const RecordAnswerSection = ({mockInterviewQuestion, interviewData, activeQuesti
 
 
       console.log("Json resp-->",mockJsonResp);
-      // const JsonFeedbackResp = JSON.parse(mockJsonResp);
+      
 
       const resp = await db.insert(UserAnswer).values({
         mockIdRef: interviewData?.mockId,
@@ -117,8 +118,10 @@ const RecordAnswerSection = ({mockInterviewQuestion, interviewData, activeQuesti
       })
       if(resp){
         toast('User Answer recorded successfully')
+        setUserAnswer('');
+        setResults([]);
       }
-      setUserAnswer('')
+      setResults([]);
       setLoading(false);
   }
 
