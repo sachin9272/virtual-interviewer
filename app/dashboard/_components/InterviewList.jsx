@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 import { MockInterview } from '@/utils/schema';
 import { desc, eq } from 'drizzle-orm';
 import React, { useState, useEffect } from 'react'
@@ -20,7 +19,6 @@ import {
   PlayCircle,
   BarChart3
 } from 'lucide-react';
-
 const InterviewList = () => {
   const { user } = useUser();
   const [interviewList, setInterviewList] = useState([]);
