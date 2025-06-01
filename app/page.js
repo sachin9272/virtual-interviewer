@@ -1,10 +1,12 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, Bot, Users, Zap, Shield, Play, Star, Check, Menu, X } from 'lucide-react';
+import { useUser } from '@clerk/nextjs';
 
 export default function AIInterviewerLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const {user} = useUser();
 
   const testimonials = [
     {
@@ -61,7 +63,11 @@ export default function AIInterviewerLanding() {
   }, []);
 
   const handleGetStarted = () => {
-    window.location.href = '/dashboard';
+    if(user){
+      window.location.href = '/dashboard';
+    }else{
+      window.location.href = '/sign-in'
+    }
   };
 
   return (

@@ -14,7 +14,7 @@ export default function Page() {
 
     {/* Auth Side */}
     <section className="w-full lg:w-1/2 flex items-center justify-center bg-white p-6">
-      <SignIn/>
+      <SignIn afterSignInUrl="/dashboard"/>
     </section>
   </main>
   )
