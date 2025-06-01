@@ -29,7 +29,7 @@ const InterviewList = () => {
   const [filterBy, setFilterBy] = useState('all');
 
   useEffect(() => {
-    user && GetInterviewList();
+    if (user) GetInterviewList();
   }, [user]);
 
   useEffect(() => {
