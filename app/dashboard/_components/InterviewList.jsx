@@ -5,13 +5,13 @@ import React, { useState, useEffect } from 'react'
 import InterviewItemCard from './InterviewItemCard';
 import { useUser } from '@clerk/nextjs';
 import { db } from '@/utils/db';
-import { 
-  Clock, 
-  Calendar, 
-  Users, 
-  TrendingUp, 
-  Search, 
-  Filter, 
+import {
+  Clock,
+  Calendar,
+  Users,
+  TrendingUp,
+  Search,
+  Filter,
   ChevronDown,
   Loader2,
   FileText,
@@ -44,7 +44,7 @@ const InterviewList = () => {
         .from(MockInterview)
         .where(eq(MockInterview.createdBy, user.primaryEmailAddress.emailAddress))
         .orderBy(desc(MockInterview.id));
-      
+
       setInterviewList(result);
     } catch (error) {
       console.error('Error fetching interviews:', error);
@@ -112,7 +112,7 @@ const InterviewList = () => {
             <div className="h-6 w-48 bg-gradient-to-r from-gray-200 to-gray-300 rounded-lg animate-pulse"></div>
           </div>
         </div>
-        
+
         <div className="grid gap-4">
           {[1, 2, 3].map((i) => (
             <div key={i} className="bg-white/50 rounded-2xl p-6 border border-gray-200 animate-pulse">
@@ -126,7 +126,7 @@ const InterviewList = () => {
             </div>
           ))}
         </div>
-        
+
         <div className="flex items-center justify-center py-8">
           <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
           <span className="ml-2 text-gray-600">Loading your interviews...</span>
@@ -230,7 +230,7 @@ const InterviewList = () => {
               {searchTerm ? 'No interviews found' : 'No interviews yet'}
             </h3>
             <p className="text-gray-500 mb-6">
-              {searchTerm 
+              {searchTerm
                 ? 'Try adjusting your search terms or filters'
                 : 'Start your AI interview journey by creating your first mock interview'
               }
@@ -253,7 +253,7 @@ const InterviewList = () => {
                 }}
               >
                 {/* Enhanced InterviewItemCard with interview data */}
-                <InterviewItemCard 
+                <InterviewItemCard
                   interview={interview}
                   index={index}
                 />
