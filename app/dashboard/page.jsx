@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Plus, Zap, Users, TrendingUp, Clock, Star } from 'lucide-react';
 import AddNewInterview from './_components/AddNewInterview';
-import InterviewList from './_components/interviewList';
+import InterviewList from './_components/InterviewList';
 
 const Dashboard = () => {
   const [stats] = useState([
