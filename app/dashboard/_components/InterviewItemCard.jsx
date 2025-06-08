@@ -20,6 +20,7 @@ import {
 const InterviewItemCard = ({ interview, index }) => {
   const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
+  console.log('interview-->', interview);
 
   const onStart = () => {
     router.push("/dashboard/interview/" + interview?.mockId);
@@ -27,15 +28,6 @@ const InterviewItemCard = ({ interview, index }) => {
 
   const onFeedbackPress = () => {
     router.push("/dashboard/interview/" + interview?.mockId + "/feedback");
-  };
-
-  // Format date
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric'
-    });
   };
 
   // Format time ago
@@ -74,37 +66,37 @@ const InterviewItemCard = ({ interview, index }) => {
 
   return (
     <div 
-      className="group relative bg-white/90 backdrop-blur-sm rounded-2xl p-4 border border-white/60 hover:border-blue-200/60 shadow-md hover:shadow-xl transition-all duration-400 transform hover:scale-[1.02] overflow-hidden cursor-pointer h-fit"
+      className="group relative bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-5 border border-white/60 hover:border-blue-200/60 shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] overflow-visible cursor-pointer min-h-[200px] sm:min-h-[220px]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Animated Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/40 via-purple-50/20 to-pink-50/40 opacity-0 group-hover:opacity-100 transition-all duration-400"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/40 via-purple-50/20 to-pink-50/40 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
       
       {/* Status Indicator */}
       <div className="absolute top-3 right-3 flex items-center space-x-1">
         <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full animate-pulse"></div>
-        <span className="text-xs font-medium text-gray-500">Active</span>
+        <span className="text-[10px] sm:text-xs font-medium text-gray-500">Active</span>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 space-y-4">
+      <div className="relative z-10 space-y-3">
         {/* Header Section */}
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
-            <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+            <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
               <Briefcase className="w-3 h-3 text-white" />
             </div>
-            <span className={`px-2 py-0.5 bg-gradient-to-r ${getExperienceColor(interview.jobExperience)} text-white text-xs font-semibold rounded-full`}>
+            <span className={`px-2 py-0.5 bg-gradient-to-r ${getExperienceColor(interview.jobExperience)} text-white text-[10px] sm:text-xs font-semibold rounded-full`}>
               {getExperienceLevel(interview.jobExperience)}
             </span>
           </div>
           
-          <h2 className="text-lg font-bold bg-gradient-to-r from-gray-800 to-blue-800 bg-clip-text text-transparent line-clamp-2 group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300 leading-tight">
+          <h2 className="text-base sm:text-lg font-bold bg-gradient-to-r from-gray-800 to-blue-800 bg-clip-text text-transparent line-clamp-2 group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300 leading-tight">
             {interview?.jobPosition}
           </h2>
           
-          <div className="flex items-center justify-between text-xs text-gray-600">
+          <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-600">
             <div className="flex items-center space-x-1">
               <User className="w-3 h-3" />
               <span>{interview?.jobExperience}Y</span>
@@ -116,59 +108,50 @@ const InterviewItemCard = ({ interview, index }) => {
           </div>
         </div>
 
-        {/* Stats Section - Horizontal Layout */}
+        {/* Stats Section - Compact Horizontal Layout */}
         <div className="flex gap-2">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-2 border border-blue-200/50 flex-1 group-hover:scale-105 transition-transform duration-300">
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-2 border border-blue-200/50 flex-1 group-hover:scale-105 transition-transform duration-300">
             <div className="flex items-center justify-center space-x-1">
               <Star className="w-3 h-3 text-blue-600" />
               <div className="text-center">
-                <div className="text-sm font-bold text-blue-800">{mockScore}%</div>
+                <div className="text-xs sm:text-sm font-bold text-blue-800">{mockScore}%</div>
               </div>
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-2 border border-purple-200/50 flex-1 group-hover:scale-105 transition-transform duration-300 delay-75">
+          <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-2 border border-purple-200/50 flex-1 group-hover:scale-105 transition-transform duration-300 delay-75">
             <div className="flex items-center justify-center space-x-1">
               <Clock className="w-3 h-3 text-purple-600" />
               <div className="text-center">
-                <div className="text-sm font-bold text-purple-800">{mockDuration}m</div>
+                <div className="text-xs sm:text-sm font-bold text-purple-800">{mockDuration}m</div>
               </div>
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-2 border border-green-200/50 flex-1 group-hover:scale-105 transition-transform duration-300 delay-150">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-2 border border-green-200/50 flex-1 group-hover:scale-105 transition-transform duration-300 delay-150">
             <div className="flex items-center justify-center space-x-1">
               <Target className="w-3 h-3 text-green-600" />
               <div className="text-center">
-                <div className="text-sm font-bold text-green-800">{mockQuestions}</div>
+                <div className="text-xs sm:text-sm font-bold text-green-800">{mockQuestions}</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Description Section - Compact */}
-        <div className="bg-gradient-to-r from-gray-50 to-white rounded-xl p-3 border border-gray-100">
-          <p className="text-xs text-gray-700 line-clamp-2 leading-relaxed">
+        <div className="bg-gradient-to-r from-gray-50 to-white rounded-lg p-2 sm:p-3 border border-gray-100">
+          <p className="text-[10px] sm:text-xs text-gray-700 line-clamp-2 leading-relaxed">
             {interview?.jobDesc || "AI-powered mock interview session for technical and behavioral assessment."}
           </p>
         </div>
 
-        {/* Date Info - Compact */}
-        <div className="flex items-center justify-between text-xs text-gray-500 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-2">
-          <span>{formatDate(interview.createdAt)}</span>
-          <div className="flex items-center space-x-1">
-            <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full animate-pulse"></div>
-            <span className="font-medium">Ready</span>
-          </div>
-        </div>
-
-        {/* Action Buttons - Compact */}
+        {/* Action Buttons - Always Visible */}
         <div className="flex gap-2">
           <Button 
             size="sm" 
             variant="outline" 
             onClick={onFeedbackPress}
-            className="flex-1 group/btn bg-white/80 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white border border-gray-200 hover:border-blue-300 text-gray-700 hover:text-blue-700 font-medium rounded-xl transition-all duration-300 text-xs h-8"
+            className="flex-1 bg-white/80 hover:bg-gradient-to-r hover:from-gray-50 hover:to-white border border-gray-200 hover:border-blue-300 text-gray-700 hover:text-blue-700 font-medium rounded-lg transition-all duration-300 text-[10px] sm:text-xs h-7 sm:h-8"
           >
             <MessageSquare className="w-3 h-3 mr-1" />
             Feedback
@@ -177,28 +160,37 @@ const InterviewItemCard = ({ interview, index }) => {
           <Button 
             size="sm"
             onClick={onStart}
-            className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg group/btn text-xs h-8"
+            className="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg text-[10px] sm:text-xs h-7 sm:h-8"
           >
-            <Play className="w-3 h-3 mr-1 group-hover/btn:translate-x-0.5 transition-transform duration-300" />
+            <Play className="w-3 h-3 mr-1 group-hover:translate-x-0.5 transition-transform duration-300" />
             Start
           </Button>
         </div>
 
-        {/* Performance Indicator - Compact */}
-        <div className="flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+        {/* Performance Indicator - Optional on Mobile */}
+        <div className="hidden sm:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
           <div className="flex items-center space-x-1 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full px-2 py-1 border border-green-200">
             <TrendingUp className="w-2 h-2 text-green-600" />
-            <span className="text-xs font-medium text-green-700">High Performance</span>
+            <span className="text-[10px] sm:text-xs font-medium text-green-700">High Performance</span>
           </div>
         </div>
       </div>
 
       {/* Hover Glow Effect */}
-      <div className={`absolute inset-0 rounded-2xl transition-all duration-400 ${
+      <div className={`absolute inset-0 rounded-2xl transition-all duration-300 ${
         isHovered 
           ? 'bg-gradient-to-r from-blue-400/5 via-purple-400/5 to-pink-400/5 shadow-[0_0_20px_rgba(59,130,246,0.2)]' 
           : ''
       }`}></div>
+
+      <style jsx>{`
+        @media (max-width: 640px) {
+          .group {
+            padding: 0.75rem;
+            min-height: 180px;
+          }
+        }
+      `}</style>
     </div>
   );
 };

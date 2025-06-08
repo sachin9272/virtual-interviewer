@@ -112,13 +112,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* Floating Button */}
-      <div className="fixed bottom-8 right-8">
-        <button className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-2xl shadow-2xl flex items-center justify-center text-white transition-all duration-300 transform hover:scale-110 hover:rotate-3">
-          <Plus className="w-8 h-8" />
-        </button>
-      </div>
     </div>
   );
 };

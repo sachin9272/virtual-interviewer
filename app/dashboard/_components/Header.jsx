@@ -47,7 +47,6 @@ const Header = () => {
             <h1 className="text-xl font-bold bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
               AI Interviewer
             </h1>
-            <p className="text-xs text-gray-300">Smart Hiring Solution</p>
           </div>
         </div>
 
